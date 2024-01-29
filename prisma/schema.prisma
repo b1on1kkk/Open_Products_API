@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model YandexEdaRestaurants {
+  id                           Int                            @id
+  title                        String?                        @db.VarChar(100)
+  rating                       Float?                         @db.Float
+  reviews                      Int?
+  cost                         Int?
+  delivery                     String?                        @db.VarChar(100)
+  YandexEdaRestaurantsProducts YandexEdaRestaurantsProducts[]
+}
+
+model YandexEdaRestaurantsProducts {
+  id                   Int                   @id @default(autoincrement())
+  name                 String?               @db.VarChar(255)
+  product_name         String?               @db.VarChar(255)
+  description          String?               @db.Text
+  price                Int?
+  weight               String?               @db.VarChar(30)
+  rest_id              Int?
+  YandexEdaRestaurants YandexEdaRestaurants? @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "YandexEdaRestaurantsProducts_ibfk_1")
+
+  @@index([rest_id], map: "rest_id")
+}
