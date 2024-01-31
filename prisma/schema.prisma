@@ -29,3 +29,12 @@ model YandexEdaRestaurantsProducts {
 
   @@index([rest_id], map: "rest_id")
 }
+
+model CsSkins {
+  id               Int     @id @default(autoincrement())
+  market_hash_name String? @db.VarChar(150)
+  volume           Int?
+  price            Float?  @db.Float
+  type             String? @db.VarChar(50)
+  skin_quality     String? @db.VarChar(50)
+}
