@@ -34,7 +34,7 @@ model CsSkins {
   id               Int     @id @default(autoincrement())
   market_hash_name String? @db.VarChar(150)
   volume           Int?
-  price            Float?  @db.Float
+  price            Int?
   type             String? @db.VarChar(50)
   skin_quality     String? @db.VarChar(50)
 }
