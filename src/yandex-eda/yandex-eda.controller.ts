@@ -14,15 +14,8 @@ export class YandexEdaController {
   ) {
     const { rt_filt_rating, rt_filt_cost } = rating_filter;
 
-    if (rt_filt_rating && !rt_filt_cost) {
-      return this.yandexService.getFilteredRestaurantsByRating(rt_filt_rating);
-    } else if (rt_filt_cost && !rt_filt_rating) {
-      return this.yandexService.getFilteredRestaurantsByCost(rt_filt_cost);
-    } else if (rt_filt_rating && rt_filt_cost) {
-      return this.yandexService.getMultiFilteredRestaurants(
-        rt_filt_rating,
-        rt_filt_cost,
-      );
+    if (rt_filt_rating || rt_filt_cost) {
+      return this.yandexService.restaurantFilter(rt_filt_rating, rt_filt_cost);
     }
 
     return this.yandexService.getRestaurants();

@@ -1,76 +1,89 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { CsSkinsService } from './cs-skins.service';
 
-export enum WeaponTypes {
-  Pistols = 'Pistols',
-  Shotguns = 'Shotguns',
-  Submachine_Guns = 'Submachine_Guns',
-  Assault_Rifles = 'Assault_Rifles',
-  Sniper_Rifles = 'Sniper_Rifles',
-  Machine_Guns = 'Machine_Guns',
-  Other = 'Other',
-}
-
-export enum SkinsQualityTypes {
-  Factory_New = 'Factory New',
-  Minimal_Wear = 'Minimal Wear',
-  Field_Tested = 'Field Tested',
-  Well_Worn = 'Well Worn',
-  Battle_Scarred = 'Battle Scarred',
-}
-
-export interface TPriceRange {
-  price_from: string;
-  price_to: string;
-  order: 'asc' | 'desc';
-  type: WeaponTypes;
-  quality: SkinsQualityTypes;
-}
+import type { TFiltering } from './types/types';
+import { WeaponTypes } from './types/types';
 
 @Controller('cs-skins')
 export class CsSkinsController {
   constructor(private readonly csSkinsService: CsSkinsService) {}
 
-  @Get('/skins')
+  @Get('skins')
   async getAllSkins(
     @Query()
-    price_range: TPriceRange,
+    filter: TFiltering,
   ) {
-    return this.csSkinsService.getAllSkins(price_range);
+    return this.csSkinsService.getAllSkins(filter);
   }
 
-  @Get('/skins/pistols')
-  async getPistols() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Pistols);
+  @Get('pistols')
+  async getPistols(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Pistols, filter);
   }
 
-  @Get('/skins/shotguns')
-  async getShotguns() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Shotguns);
+  @Get('shotguns')
+  async getShotguns(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(
+      WeaponTypes.Shotguns,
+      filter,
+    );
   }
 
-  @Get('/skins/submachine_guns')
-  async getSubmachineGuns() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Submachine_Guns);
+  @Get('submachine_guns')
+  async getSubmachineGuns(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(
+      WeaponTypes.Submachine_Guns,
+      filter,
+    );
   }
 
-  @Get('/skins/assault_rifles')
-  async getAssaultRifles() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Assault_Rifles);
+  @Get('assault_rifles')
+  async getAssaultRifles(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(
+      WeaponTypes.Assault_Rifles,
+      filter,
+    );
   }
 
-  @Get('/skins/sniper_rifles')
-  async getSniperRifles() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Sniper_Rifles);
+  @Get('sniper_rifles')
+  async getSniperRifles(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(
+      WeaponTypes.Sniper_Rifles,
+      filter,
+    );
   }
 
-  @Get('/skins/machine_guns')
-  async getMachineGuns() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Machine_Guns);
+  @Get('machine_guns')
+  async getMachineGuns(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(
+      WeaponTypes.Machine_Guns,
+      filter,
+    );
   }
 
-  @Get('/skins/other')
-  async getOtherWeapons() {
-    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Other);
+  @Get('other')
+  async getOtherWeapons(
+    @Query()
+    filter: TFiltering,
+  ) {
+    return this.csSkinsService.getDifferentWeapons(WeaponTypes.Other, filter);
   }
 }

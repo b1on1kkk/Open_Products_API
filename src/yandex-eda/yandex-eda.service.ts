@@ -12,37 +12,17 @@ export class YandexEdaService {
     return await this.prisma.yandexEdaRestaurants.findMany();
   }
 
-  async getFilteredRestaurantsByRating(
-    kind_of_filtering: SORTING_TYPES,
-  ): Promise<YandexEdaRestaurants[]> {
-    return await this.prisma.yandexEdaRestaurants.findMany({
-      orderBy: {
-        rating: kind_of_filtering,
-      },
-    });
-  }
-
-  async getFilteredRestaurantsByCost(
-    kind_of_filtering: SORTING_TYPES,
-  ): Promise<YandexEdaRestaurants[]> {
-    return await this.prisma.yandexEdaRestaurants.findMany({
-      orderBy: {
-        cost: kind_of_filtering,
-      },
-    });
-  }
-
-  async getMultiFilteredRestaurants(
-    kind_of_rating_filtering: SORTING_TYPES,
-    kind_of_cost_filtering: SORTING_TYPES,
+  async restaurantFilter(
+    rating_filtering: SORTING_TYPES,
+    cost_filtering: SORTING_TYPES,
   ): Promise<YandexEdaRestaurants[]> {
     return await this.prisma.yandexEdaRestaurants.findMany({
       orderBy: [
         {
-          rating: kind_of_rating_filtering,
+          rating: rating_filtering,
         },
         {
-          cost: kind_of_cost_filtering,
+          cost: cost_filtering,
         },
       ],
     });

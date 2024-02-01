@@ -1,4 +1,4 @@
-export type SORTING_TYPES = 'desc' | 'asc';
+export type SORTING_TYPES = 'desc' | 'asc' | undefined;
 
 export interface TRatingFilter {
   rt_filt_rating: SORTING_TYPES;
